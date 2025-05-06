@@ -1,7 +1,15 @@
 import pytest
+import allure
 from playwright.sync_api import expect
 
 
+@allure.title('Checking the server type switch')
+@allure.description('''
+Test checks:
+- general functionality of the server type toggle
+- addaptive of filter set when changing the server type
+- addaptive of server cards when changing the server type
+''')
 def test_server_type_switcher(hosting_page):    
     for server_type in ["Dedicated servers", "Virtual servers"]:
         filters = ["Data center", "CPU", "RAM", "Disk", "Type", "OS", "Price"] if server_type == "Virtual servers" \
@@ -19,9 +27,16 @@ def test_server_type_switcher(hosting_page):
         assert sorted(selected_cards) != sorted(current_cards), \
             f'Cards did not change when selecting {server_type}'
 
+@allure.title('Checking the currency switch')
+@allure.description('''
+Test checks:
+- general functionality of the currency toggle (twice)
+- addaptive of the currency on the server cards
+''')
 def test_currency_switcher(hosting_page):
     symbols = {'EUR': '€', 'USD': '$'}
     
+    @allure.step('Checking that the price on the cards have changed currency to {currency}')
     def assertion_currency(currency: str):
         prices = hosting_page.get_prices()
         assert all(symbols[currency] in price for price in prices), \
@@ -39,6 +54,7 @@ def test_currency_switcher(hosting_page):
     assert returned == original and returned in symbols
     assertion_currency(returned)
 
+@allure.title('Checking the price filter')
 @pytest.mark.parametrize('min_value, max_value', [
     pytest.param(0, 100),
     pytest.param(30, 35),
@@ -50,10 +66,3 @@ def test_price_filter(hosting_page, min_value, max_value):
     min_price = float(min(prices)[1:])
     max_price = float(max(prices)[1:])
     assert min_price >= min_value and max_price <= max_value
-    
-    
-# нужны ли скриншоты, если нужны, то когда
-# прикрутить allure и шаги
-# возможно, добавить другие маркеры (если придумаю зачем)
-# запихать все это в докер
-# написать README
