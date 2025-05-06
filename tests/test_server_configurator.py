@@ -48,4 +48,3 @@ def test_price_filter(hosting_page, min_value, max_value):
 # возможно, добавить другие маркеры (если придумаю зачем)
 # запихать все это в докер
 # написать README
-# пушнуть в гит
