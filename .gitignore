@@ -3,11 +3,8 @@ __pycache__/
 *.py[cod]
 *.egg-info/
 
-# Virtualenv
+# venv
 .venv/
-env/
-ENV/
-venv/
 
 # IDE
 .idea/
@@ -20,6 +17,5 @@ venv/
 allure-results/
 allure-report/
 
-# OS junk
-.DS_Store
-Thumbs.db
+# Docker
+.dockerignore

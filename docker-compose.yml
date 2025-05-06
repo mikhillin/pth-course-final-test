@@ -1,0 +1,8 @@
+services:
+  tests:
+    build: .
+    volumes:
+      - .:/qaa
+    command: pytest -v --alluredir=allure-results
+
+ 

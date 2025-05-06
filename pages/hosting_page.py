@@ -15,7 +15,7 @@ class HostingPage(BasePage):
         label = type_toggle.locator(f'label:has-text("{type}")')
         expect(label).to_be_visible(timeout=10000)
         label.click()
-        self.wait(timeout=1000)
+        self.wait(timeout=2000)
         value = 'vps' if type == 'Virtual servers' else 'dedicated'
         return label.locator(f'input[value={value}]')
     
