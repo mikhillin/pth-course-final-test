@@ -4,16 +4,20 @@ from playwright.sync_api import expect
 
 def test_server_type_switcher(hosting_page):    
     for server_type in ["Dedicated servers", "Virtual servers"]:
+        filters = ["Data center", "CPU", "RAM", "Disk", "Type", "OS", "Price"] if server_type == "Virtual servers" \
+            else ["Data center", "CPU", "RAM", "Disk", "RAID", "GPU", "Price", "1 month"]
+
         current_cards = hosting_page.get_prices()
         
         selected_type = hosting_page.select_server_type(server_type)
         expect(selected_type).to_be_checked()
         
+        selected_filters = hosting_page.get_filters()
+        assert selected_filters == filters, f'Filter set did not change when selecting {server_type}'
+        
         selected_cards = hosting_page.get_prices()
         assert sorted(selected_cards) != sorted(current_cards), \
             f'Cards did not change when selecting {server_type}'
-        # проверить, что появляются доп фильтры
-        # возможно, добавить функцию, которая будет хранить все фильтры как объекты
 
 def test_currency_switcher(hosting_page):
     symbols = {'EUR': '€', 'USD': '$'}

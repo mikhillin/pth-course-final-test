@@ -1,4 +1,4 @@
-from playwright.sync_api import Page, Locator
+from playwright.sync_api import expect, Page, Locator
 
 from .base_page import BasePage
 
@@ -11,6 +11,7 @@ class HostingPage(BasePage):
     def select_server_type(self, type: str) -> Locator:
         type_toggle = self.page.locator('gcore-switch-buttons')
         label = type_toggle.locator(f'label:has-text("{type}")')
+        expect(label).to_be_visible(timeout=10000)
         label.click()
         value = 'vps' if type == 'Virtual servers' else 'dedicated'
         return label.locator(f'input[value={value}]')
@@ -19,6 +20,7 @@ class HostingPage(BasePage):
         return self.currency_toggle.locator('input[type="radio"]:checked').get_attribute("value")
     
     def switch_currency(self) -> str | None:
+        expect(self.currency_toggle).to_be_visible(timeout=10000)
         self.currency_toggle.click()
         return self.get_currency()
 
@@ -27,12 +29,14 @@ class HostingPage(BasePage):
             button = self.page.locator("button:has-text('Show more')")
             if not button.is_visible():
                 break
+            expect(button).to_be_visible(timeout=10000)
             button.click()
             
         return self.page.locator('.gc-price-card-header .gc-text_36').all_inner_texts()
     
     def set_prices(self, min: str, max: str) -> None:
         price_filter = self.page.locator('gcore-price-filter')
+        expect(price_filter).to_be_visible(timeout=10000)
         price_filter.click()
         
         def set_price(value: str, is_max: bool = True) -> Locator:
@@ -47,5 +51,8 @@ class HostingPage(BasePage):
         for input_elem in [min_input, max_input]:
             input_elem.dispatch_event("input")
 
- 
+    def get_filters(self) -> list[str]:
+        filter_bar = self.page.locator('gcore-filter-bar')
+        filters = filter_bar.locator('li').all_inner_texts()
+        return filters
         
