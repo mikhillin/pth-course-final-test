@@ -3,10 +3,15 @@ from playwright.sync_api import expect
 
 
 def test_server_type_switcher(hosting_page):    
-    for type in ["Dedicated servers", "Virtual servers"]:
-        current_type = hosting_page.select_server_type(type)
-        expect(current_type).to_be_checked()
-        # проверить, что меняются карточки
+    for server_type in ["Dedicated servers", "Virtual servers"]:
+        current_cards = hosting_page.get_prices()
+        
+        selected_type = hosting_page.select_server_type(server_type)
+        expect(selected_type).to_be_checked()
+        
+        selected_cards = hosting_page.get_prices()
+        assert sorted(selected_cards) != sorted(current_cards), \
+            f'Cards did not change when selecting {server_type}'
         # проверить, что появляются доп фильтры
         # возможно, добавить функцию, которая будет хранить все фильтры как объекты
 
