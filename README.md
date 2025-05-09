@@ -9,7 +9,7 @@ This project is designed as a final assignment for a PTH course.
 
 - Python 3.12
 - Pytest
-- Playwright
+- Playwright (chromium only)
 - Allure-pytest
 - Docker & Docker Compose
 
@@ -28,8 +28,9 @@ cd pth-course-final-test
 
 ```bash
 python -m venv .venv
-source venv/bin/activate
+source .venv/bin/activate
 pip install -r requirements.txt
+playwright install chromium
 ```
 ### 3. Optional. Run tests locally
 
