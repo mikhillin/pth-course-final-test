@@ -1,6 +1,7 @@
 # GCore Server Configuration Autotests
 
-This project contains automated UI tests for the [GCore server configuration page](https://gcore.com/hosting).
+Automated UI tests for the for the [GCore server configuration page](https://gcore.com/hosting).
+This project is designed as a final assignment for a PTH course.
 
 ---
 
