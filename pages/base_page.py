@@ -9,7 +9,7 @@ class BasePage:
         self.path = path
         self.url = f'{self.BASE_URL}{self.path}'
 
-    def open(self, timeout: int = 2000) -> None:
+    def open(self) -> None:
         self.page.goto(self.url)
 
     def wait(self, timeout: int = 5000) -> None:

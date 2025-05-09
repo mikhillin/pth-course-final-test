@@ -20,9 +20,9 @@ class HostingPage(BasePage):
     def select_server_type(self, type: str) -> Locator:
         type_toggle = self.page.locator(self.SERVER_TYPE_TOGGLE)
         label = type_toggle.locator(f'label:has-text("{type}")')
-        expect(label).to_be_visible(timeout=10000)
+        expect(label).to_be_visible()
         label.click()
-        self.wait(timeout=2000)
+        self.wait()
         value = 'vps' if type == 'Virtual servers' else 'dedicated'
         return label.locator(f'input[value={value}]')
 
@@ -32,7 +32,7 @@ class HostingPage(BasePage):
 
     @allure.step('Changing currency')
     def switch_currency(self) -> str | None:
-        expect(self.currency_toggle).to_be_visible(timeout=10000)
+        expect(self.currency_toggle).to_be_visible()
         self.currency_toggle.click()
         return self.get_currency()
 
@@ -42,7 +42,7 @@ class HostingPage(BasePage):
             button = self.page.locator(self.SHOW_MORE_BTN)
             if not button.is_visible():
                 break
-            expect(button).to_be_visible(timeout=10000)
+            expect(button).to_be_visible()
             button.click()
 
         return self.page.locator(self.PRICE_CARDS).all_inner_texts()
@@ -57,7 +57,7 @@ class HostingPage(BasePage):
     @allure.step('Setting the price filter from {min} to {max}')
     def set_prices(self, min: str, max: str) -> None:
         price_filter = self.page.locator(self.PRICE_FILTER)
-        expect(price_filter).to_be_visible(timeout=10000)
+        expect(price_filter).to_be_visible()
         price_filter.click()
 
         self._set_price_input(price_filter, min, is_max=False)
