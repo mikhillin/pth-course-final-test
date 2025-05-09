@@ -12,17 +12,19 @@ Test checks:
 - addaptive of server cards when changing the server type
 ''')
 def test_server_type_switcher(hosting_page):    
-    for server_type in ["Dedicated servers", "Virtual servers"]:
-        filters = ["Data center", "CPU", "RAM", "Disk", "Type", "OS", "Price"] if server_type == "Virtual servers" \
-            else ["Data center", "CPU", "RAM", "Disk", "RAID", "GPU", "Price", "1 month"]
-
+    filter_options = { 
+        "Dedicated servers": ["Data center", "CPU", "RAM", "Disk", "RAID", "GPU", "Price", "1 month"],
+        "Virtual servers": ["Data center", "CPU", "RAM", "Disk", "Type", "OS", "Price"],
+        }
+    
+    for server_type, expected_filters in filter_options.items():
         current_cards = hosting_page.get_prices()
         
         selected_type = hosting_page.select_server_type(server_type)
         expect(selected_type).to_be_checked()
         
         selected_filters = hosting_page.get_filters()
-        assert selected_filters == filters, f'Filter set did not change when selecting {server_type}'
+        assert selected_filters == expected_filters, f'Filter set did not change when selecting {server_type}'
         
         selected_cards = hosting_page.get_prices()
         assert sorted(selected_cards) != sorted(current_cards), \
