@@ -24,7 +24,7 @@ git clone https://github.com/mikhillin/pth-course-final-test.git
 cd pth-course-final-test
 ```
 
-### 2. Optional. Virtual environment preparation (for locally running without Docker)
+### 2. (Optional) Virtual environment preparation (for locally running without Docker)
 
 ```bash
 python -m venv .venv
@@ -32,7 +32,7 @@ source .venv/bin/activate
 pip install -r requirements.txt
 playwright install chromium
 ```
-### 3. Optional. Run tests locally
+### 3. (Optional) Run tests locally
 
 ```bash
 pytest 
