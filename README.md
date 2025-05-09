@@ -1,6 +1,6 @@
 # GCore Server Configuration Autotests
 
-Automated UI tests for the for the [GCore server configuration page](https://gcore.com/hosting).
+Automated UI tests for the [GCore server configuration page](https://gcore.com/hosting).
 This project is designed as a final assignment for a PTH course.
 
 ---
@@ -43,14 +43,24 @@ pytest
 ### 4. Run tests in Docker
 
 ```bash
-docker-compose up
+docker compose up
 ```
-> This is installing all dependencies, running all tests and saving allure-results in the local folder
+> This command installs all dependencies, runs all tests, and saves Allure results in the allure-results/ folder.
+
+⚠️ **Note for Windows (WSL2) users**: If you're using Windows with WSL2, make sure Docker is properly integrated with your WSL environment.
+1. Install [Docker Desktop for Windows](https://www.docker.com/products/docker-desktop)
+2. Open Docker Desktop → go to Settings → Resources → WSL Integration
+3. Enable integration for your current WSL distro (e.g., Ubuntu)
+4. Restart your WSL terminal and check Docker access:
+```bash
+docker --version
+docker compose version
+```
 
 ### 5. Generate Allure Report
 
-Use locally this command:
+To generate the report locally:
 ```bash
 allure serve allure-results
 ```
-And go to the generated localhost link (e.g. http://127.0.0.1:46344)
+Then open the generated local link in your browser (e.g. http://127.0.0.1:44444)
