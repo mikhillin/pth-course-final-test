@@ -38,7 +38,7 @@ playwright install chromium
 ```bash
 pytest 
 ```
-> Tests generate allure-reports automatically.
+> Tests automatically runs Allure and saves results in the allure-results/ folder.
 > If you don't need it, remove the '--alluredir=allure-results' flag from the pytest.ini
 
 ### 4. Run tests in Docker
