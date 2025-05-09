@@ -1,6 +1,7 @@
 # GCore Server Configuration Autotests
 
 Automated UI tests for the [GCore server configuration page](https://gcore.com/hosting).
+
 This project is designed as a final assignment for a PTH course.
 
 ---
@@ -24,7 +25,7 @@ git clone https://github.com/mikhillin/pth-course-final-test.git
 cd pth-course-final-test
 ```
 
-### 2. (Optional) Virtual environment preparation (for locally running without Docker)
+### 2. (Optional - for locally running without Docker) Virtual environment preparation
 
 ```bash
 python -m venv .venv
@@ -32,7 +33,7 @@ source .venv/bin/activate
 pip install -r requirements.txt
 playwright install chromium
 ```
-### 3. (Optional) Run tests locally
+### 3. (Optional - for locally running without Docker) Run tests locally
 
 ```bash
 pytest 
